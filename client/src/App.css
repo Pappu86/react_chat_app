@@ -1,38 +1,95 @@
+#root{
+  height: 100%;
+}
+
 .App {
+  height: 100%;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1f1f1;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.join{
+  flex: 0 0 25%;
+  background-color: #009eda;
+  padding: 10%;
+  border-radius: 5px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.join-form{
   display: flex;
   flex-direction: column;
+}
+
+.join-form input{
+  margin-top: 10px;
+    flex: 0 0 100%;
+    padding: 10px;
+    border-radius: 5px;
+    align-items: center;
+    border: 1px solid #00a8b9;
+    outline: none;
+}
+
+.join-form a{
+  margin-top: 20px;
+  text-decoration: none;
+  text-align: center;
+  background-color: green;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  opacity: 1;
+}
+
+.join-form a:hover{
+  opacity: 0.7;
+}
+
+.chat{
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid dodgerblue;
+  border-radius: 5px;
+  background: white;
+}
+
+.chat-head{
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background: dodgerblue;
+  height: 40px;
+  color:white;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 5px 10px;
+}
+
+.chat-head a{
+  text-decoration: none;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.chat-box{
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  justify-content: flex-end;
+  padding: 10px;;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.chat-box input{
+  flex: 0 0 100%;
+  padding: 5px;
+  height: 30px;
+  font-size: 20px;
+  margin-top: 15px;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
