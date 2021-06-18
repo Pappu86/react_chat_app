@@ -18,8 +18,11 @@ const Chat = ()=>{
         });
 
         socket.on('message', (message)=>{
+            console.log("pappu testing message", message);
             setMessages((exsistingMsgs=>[...exsistingMsgs, message]));
+            console.log("messages:", messages);
         });
+
     }, []);
 
     const sendMessage=(e)=>{

@@ -35,13 +35,17 @@ io.on('connection', socket => {
     console.log("message: ", message);
     const user=getUserById(socket.id);
 
-    console.log("user: ", user);
+    console.log("user test: ", user);
 
-    io.to(user.room).emit("message", {
-      user:user.name, 
-      text:message
-    });
-    console.log("io: ", users);
+    if(user){
+      io.sockets.emit("message", {
+        user:user.name, 
+        text:message
+      });      
+    }
+
+    console.log("io: ");
+
   });
 
   socket.on('disconnect',()=>{
@@ -49,7 +53,7 @@ io.on('connection', socket => {
     const user=removeUser(socket.id);
 
     if(user){      
-      io.to(user.room).emit("message", {
+      io.sockets.emit("message", {
         user:"system", 
         text:`${user.name} just left ${user.room}.`
       });
