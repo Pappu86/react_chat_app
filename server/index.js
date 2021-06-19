@@ -2,7 +2,7 @@ const express = require('express');
 const http= require('http');
 const socketIo= require('socket.io');
 let cors = require('cors');
-const {addUser, removeUser, getUserById}=require('../users');
+const {addUser, removeUser, getUserById, getRoomUsers}=require('../users');
 
 const port = 4000;
 const app = express();
@@ -17,13 +17,15 @@ io.on('connection', socket => {
   console.log('a user connected', socket.id);
 
   socket.on("join", (data, callback)=>{
-    // console.log("Join data: ", data);
     const {name, room}=data;
     const {error, user}=addUser({id:socket.id, name, room});
 
     socket.join(room);
     socket.emit("message", {user:"system", text:`Welcome ${name} to ${room}.`});
     socket.broadcast.to(room).emit("message", {user:"system", text:`${name} just joined ${room}.`});
+
+    const roomUsers=getRoomUsers(room);
+    io.sockets.to(room).emit("userList", { roomUsers });
 
     if(error){
       callback(error);
@@ -32,20 +34,14 @@ io.on('connection', socket => {
   });
 
   socket.on("message", (message)=>{
-    console.log("message: ", message);
     const user=getUserById(socket.id);
 
-    console.log("user test: ", user);
-
-    if(user){
+    if(user){     
       io.sockets.emit("message", {
         user:user.name, 
         text:message
       });      
     }
-
-    console.log("io: ");
-
   });
 
   socket.on('disconnect',()=>{
@@ -57,11 +53,14 @@ io.on('connection', socket => {
         user:"system", 
         text:`${user.name} just left ${user.room}.`
       });
+
+      const roomUsers=getRoomUsers(user.room);
+      io.sockets.to(user.room).emit("userList", { roomUsers });
     }
   });
 
 });
 
 httpServer.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Server running at http://localhost:${port}`)
 })

@@ -48,10 +48,27 @@
 }
 
 .chat{
-  width: 400px;
+  width: 500px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   border: 2px solid dodgerblue;
+  border-radius: 5px;
+  background: white;
+}
+
+.user-list{
+  width: 100px;  
+  display: flex;
+  flex-direction: column;  
+  background: white;
+  border-right: 2px solid dodgerblue;
+}
+
+.chat-section{
+  height: 100%;
+  flex: auto;
+  display: flex;
+  flex-direction: column;  
   border-radius: 5px;
   background: white;
 }
@@ -78,7 +95,7 @@
   flex: 0 0 100%;
   display: flex;
   flex-direction: column;
-  min-height: 300px;
+  min-height: 270px;
   justify-content: flex-end;
   padding: 10px;;
 }
@@ -92,4 +109,38 @@
   outline: none;
   border-radius: 5px;
   border: 1px solid #ccc;
+}
+
+.messages{
+  /* flex: 0 0 100%; */
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+  align-items: center;
+}
+
+.messages .message{
+display: flex;
+flex-direction: column;
+width: 95%;
+padding: 5px;
+align-items: flex-start;
+margin: 10px 0;
+border-radius: 5px;
+background: #ccc;
+}
+
+.messages .self{
+  color: white;
+  background: dodgerblue;
+  align-items: flex-end;
+}
+
+.message .user{
+  color:#565555;
+  font-size: 12px;
+}
+
+.messages .self .user{
+  color:#ddd;
 }
